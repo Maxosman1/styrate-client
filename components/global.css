@@ -1,0 +1,17 @@
+* {
+    margin: 0; border: 0; padding: 0;
+    text-decoration: none; list-style: none; font-size: 16px; font-weight: normal;
+    color: inherit; 
+    font-family: sans-serif; letter-spacing: inherit;
+}
+
+html{
+    background-color:  white;
+}
+html, body, #__next{
+    width: 100%; height: fit-content;
+}
+
+#__next{
+    display: flex; flex-direction: column; align-items: center;
+}
