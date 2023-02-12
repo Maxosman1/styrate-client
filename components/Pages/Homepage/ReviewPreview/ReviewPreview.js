@@ -5,7 +5,8 @@ const ReviewPreview = ({
     productImage,
     productName,
     productType,
-    textReview
+    textReview,
+    username
   }) => {
     return (
         <ReviewPreviewContainer>
@@ -23,6 +24,7 @@ const ReviewPreview = ({
                     alt={productName}
                     className="review-preview__product-image"
                 />
+                <div className="review-preview__username">{username}</div>
                 <div className="review-preview__product-name">{productName}</div>
                 <div className="review-preview__product-type">{productType}</div>
             </div>

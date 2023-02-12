@@ -1,3 +1,5 @@
+import { db } from '../../../firebase/firebase'
+import { addDoc, collection } from "firebase/firestore";
 import { useRef, useState } from "react";
 import { HomepageContainer } from "./Homepage.styled";
 import ReviewPreview from "./ReviewPreview/ReviewPreview";
@@ -13,6 +15,7 @@ const Homepage = () => {
       productType: "beauty"
     });
     const [display, setDisplay] = useState(false)
+    const [message, setMessage] = useState(null)
   
     const handleChange = (e) => {
       setDisplay(false)
@@ -37,9 +40,24 @@ const Homepage = () => {
         });
     };
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault();
-      console.log(values);
+      setDisplay(false)
+      setMessage('Sending Data')
+      const dbRef = collection(db, "reviews");
+      try{
+        await addDoc(dbRef, {
+          tiktokVideoId: values.tiktokVideoId,
+          amazonProductLink: values.amazonProductLink,
+          username: values.username,
+          textReview: values.textReview,
+          productType: values.productType
+        })
+        setMessage('Data Sent')
+      }
+      catch(e){
+        setMessage('Error')
+      }
     };
 
     return (
@@ -104,9 +122,21 @@ const Homepage = () => {
             <div className="content" ref={content}>
                 {
                   (display)
-                    ? <ReviewPreview videoId={values.tiktokVideoId}/>
+                    ? (
+                      <ReviewPreview 
+                      videoId={values.tiktokVideoId}
+                      productImage={null}
+                      productName={null}
+                      productType={values.productType}
+                      textReview={values.textReview}
+                      username={values.username}
+                      />
+                    )
                     : null
                 }
+            </div>
+            <div className="message">
+              {message}
             </div>
         </HomepageContainer>
     );
