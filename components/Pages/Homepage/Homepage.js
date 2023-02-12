@@ -13,7 +13,8 @@ const Homepage = () => {
       amazonProductLink: "",
       username: "",
       textReview: "",
-      productType: "beauty"
+      productType: "beauty",
+      productName: ""
     });
     const [display, setDisplay] = useState(false)
     const [message, setMessage] = useState(null)
@@ -55,7 +56,8 @@ const Homepage = () => {
           textReview: values.textReview,
           productType: values.productType,
           upvotes: 0,
-          createdOn: new Date()
+          createdOn: new Date(),
+          productName: values.productName
         })
         setMessage('Data Sent')
       }
@@ -82,6 +84,15 @@ const Homepage = () => {
                 name="amazonProductLink"
                 id="amazonProductLink"
                 value={values.amazonProductLink}
+                onChange={handleChange}
+                />
+                <br />
+                <label htmlFor="productName">Product Name:</label>
+                <input
+                type="text"
+                name="productName"
+                id="productName"
+                value={values.productName}
                 onChange={handleChange}
                 />
                 <br />

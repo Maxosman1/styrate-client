@@ -7,7 +7,7 @@ const Review = ({reviewData}) => {
     return (
         <>
         <Head>
-          <title>Styrate | {reviewData.postID}</title>
+          <title>Styrate | Review</title>
           <meta name="description" content="[Insert Descritption]" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
@@ -28,6 +28,7 @@ export async function getServerSideProps(context) {
         textReview: doc.data().textReview,
         productType: doc.data().productType,
         upvotes: doc.data().upvotes,
+        productName: doc.data().productName,
         // createdOn: doc.data().createdOn
     })) 
     if(reviewData.length===0){
@@ -40,7 +41,7 @@ export async function getServerSideProps(context) {
     }else{
       return{
         props:{
-          reviewData: reviewData
+          reviewData: reviewData[0]
         }
       }
     }

@@ -33,7 +33,8 @@ const Reviews = () => {
           textReview: doc.data().textReview,
           productType: doc.data().productType,
           upvotes: doc.data().upvotes,
-          createdOn: doc.data().createdOn
+          createdOn: doc.data().createdOn,
+          productName: doc.data().productName,
         })) 
         if(result.length!=0){
           setReviews(result)
@@ -93,7 +94,8 @@ const Reviews = () => {
           textReview: doc.data().textReview,
           productType: doc.data().productType,
           upvotes: doc.data().upvotes,
-          createdOn: doc.data().createdOn
+          createdOn: doc.data().createdOn,
+          productName: doc.data().productName,
         })) 
         if(result.length!=0){
           setReviews(oldData => [...oldData, result[0]])
@@ -139,6 +141,7 @@ const Reviews = () => {
                         allowFullScreen
                         />
                         <div className="text">
+                          <p>Product Name: {review.productName}</p>
                           <h3>Username: {review.username}</h3>
                           <p>Product Type: {review.productType}</p>
                           <p className="reviewContent">Text Review: {review.textReview}</p>
