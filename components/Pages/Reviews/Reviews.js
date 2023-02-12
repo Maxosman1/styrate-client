@@ -2,11 +2,13 @@ import ReviewList from "./ReviewList/ReviewList";
 import { ReviewsContainer } from "./Reviews.styled";
 import {db} from '../../../firebase/firebase'
 import { collection, doc, getDocs, increment, query, updateDoc, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Reviews = () => { 
     const dbRef = collection(db, 'reviews')
     const [reviews, setReviews] = useState(null)
+    const [reviewCount, setReviewCount] = useState(0)
+    const [loadingError, setLoadingError] = useState(false)
     useEffect(()=>{
       getData()
     },[])
@@ -34,9 +36,11 @@ const Reviews = () => {
         }else{
           setReviews([{username: 'No results'}])
         }
+        setLoadingError(false)
       }
       catch(e){
         console.log(e)
+        setLoadingError(true)
       }
     }
   
@@ -62,6 +66,17 @@ const Reviews = () => {
           e.target.querySelector('span').innerHTML = 'Server Error'
       }
     };
+
+    const sensorRef = useRef(null)
+    const checkIfInViewport = () => {
+      if(sensorRef.current.offsetTop < window.innerHeight){
+        console.log('In view')
+      }
+    }
+    useEffect(()=>{
+      checkIfInViewport()
+      window.addEventListener('scroll', checkIfInViewport)
+    },[])
 
     return (
         <ReviewsContainer>
@@ -95,6 +110,7 @@ const Reviews = () => {
                   : <>Loading...</>
                       
               }
+              <div className="sensor" ref={sensorRef}></div>
             </div>
         </ReviewsContainer>
     );

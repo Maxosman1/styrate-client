@@ -54,7 +54,8 @@ const Homepage = () => {
           username: values.username,
           textReview: values.textReview,
           productType: values.productType,
-          upvotes: 0
+          upvotes: 0,
+          createdOn: new Date()
         })
         setMessage('Data Sent')
       }

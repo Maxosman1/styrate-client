@@ -5,4 +5,5 @@ export const ReviewsContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin: 10px 0 0 10px;
+    padding-bottom: 300px;
 `
