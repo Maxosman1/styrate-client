@@ -28,8 +28,8 @@ export async function getServerSideProps(context) {
         textReview: doc.data().textReview,
         productType: doc.data().productType,
         upvotes: doc.data().upvotes,
+        // createdOn: doc.data().createdOn,
         productName: doc.data().productName,
-        // createdOn: doc.data().createdOn
     })) 
     if(reviewData.length===0){
       return {
