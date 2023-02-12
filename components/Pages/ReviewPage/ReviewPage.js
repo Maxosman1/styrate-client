@@ -23,7 +23,7 @@ const ReviewPage = ({reviewData}) => {
                 <Link href='/reviews'>Reviews</Link>
             </div>
             <div className="content">
-                <h1>Product Name</h1>
+                <h1>{reviewData.productName}</h1>
                 <div className="contentInner">
                     <iframe
                     src={`https://www.tiktok.com/embed/${reviewData.tiktokVideoId}`}

@@ -7,7 +7,7 @@ const Review = ({reviewData}) => {
     return (
         <>
         <Head>
-          <title>Styrate | Review</title>
+          <title>Styrate | {reviewData.productName}</title>
           <meta name="description" content="[Insert Descritption]" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
