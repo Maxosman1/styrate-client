@@ -19,5 +19,6 @@ export const HomepageContainer = styled.div`
     }
     & a{
         color: blue; text-decoration: underline;
+        width: fit-content;
     }
 `

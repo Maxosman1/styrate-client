@@ -3,6 +3,7 @@ import { ReviewsContainer } from "./Reviews.styled";
 import {db} from '../../../firebase/firebase'
 import { collection, doc, getCountFromServer, getDocs, increment, limit, orderBy, query, startAfter, updateDoc, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const Reviews = () => { 
     const dbRef = collection(db, 'reviews')
@@ -17,10 +18,10 @@ const Reviews = () => {
     const getFirstBatch = async()=> {
       let q;
       if(filter===null || filter==='all'){
-        q = query(dbRef, orderBy('createdOn', 'desc'),limit(10))
+        q = query(dbRef, orderBy('createdOn', 'desc'),limit(5))
       }
       else{
-        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), limit(10))
+        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), limit(5))
       }
       try{
         const rawData = await getDocs(q);
@@ -77,10 +78,10 @@ const Reviews = () => {
       const finalPost = reviews.slice(-1)[0]
       let q;
       if(filter===null || filter==='all'){
-        q = query(dbRef, orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(10))
+        q = query(dbRef, orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(5))
       }
       else{
-        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(10))
+        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(5))
       }
       try{
         const rawData = await getDocs(q);
@@ -123,6 +124,7 @@ const Reviews = () => {
                 <option value="tech">Tech</option>
                 <option value="other">Other</option>
                 </select>
+                <Link href='/'>Home</Link>
             </div>
             <div className="reviewListContainer">
               {

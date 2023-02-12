@@ -9,6 +9,10 @@ export const ReviewsContainer = styled.div`
     & .filter-container{
         width: 80%;
         margin: 10px 0;;
+        & a{
+            color: blue; text-decoration: underline;
+            margin-left: 20px;
+        }
     }
     & .sensor{
         border: 1px solid black;
