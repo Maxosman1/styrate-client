@@ -51,7 +51,8 @@ const Homepage = () => {
           amazonProductLink: values.amazonProductLink,
           username: values.username,
           textReview: values.textReview,
-          productType: values.productType
+          productType: values.productType,
+          upvotes: 0
         })
         setMessage('Data Sent')
       }

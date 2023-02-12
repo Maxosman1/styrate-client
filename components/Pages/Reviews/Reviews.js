@@ -1,13 +1,12 @@
 import ReviewList from "./ReviewList/ReviewList";
 import { ReviewsContainer } from "./Reviews.styled";
 import {db} from '../../../firebase/firebase'
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, doc, getDocs, increment, query, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const Reviews = () => { 
     const dbRef = collection(db, 'reviews')
     const [reviews, setReviews] = useState(null)
-    console.log(reviews)
     useEffect(()=>{
       getData()
     },[])
@@ -21,7 +20,8 @@ const Reviews = () => {
           amazonProductLink: doc.data().amazonProductLink,
           username: doc.data().username,
           textReview: doc.data().textReview,
-          productType: doc.data().productType
+          productType: doc.data().productType,
+          upvotes: doc.data().upvotes
         })) 
         setReviews(result)
       }
@@ -71,8 +71,17 @@ const Reviews = () => {
       setReviewsFetched(0);
     };
   
-    const upvoteReview = (review) => {
-      // logic to upvote the review
+    const handleUpvote = async(e, upvoteCount) => {
+      e.target.querySelector('span').innerHTML = upvoteCount + 1
+      console.log(e.target, upvoteCount)
+      const docRef = doc(db, 'reviews', e.target.id)
+      try{
+          await updateDoc(docRef, {
+              upvotes: increment(1)
+          })
+      }catch(err){
+          console.log(err)
+      }
     };
 
     return (
@@ -91,12 +100,24 @@ const Reviews = () => {
                 <option value="other">Other</option>
                 </select>
             </div>
-            <ReviewList
-
-                reviews={reviews}
-                // selectedType={selectedType}
-                // upvoteReview={upvoteReview}
-            />
+            <div className="reviewListContainer">
+              {
+                (reviews)
+                  ? (
+                    reviews.map((review) => (
+                      <div className="review-preview" key={review.username}>
+                          <h3>Username: {review.username}</h3>
+                          <p>Text Review: {review.textReview}</p>
+                          <p>Product Type: {review.productType}</p>
+                          <button onClick={(e=e, upvoteCount=review.upvotes)=>{handleUpvote(e, review.upvotes)}} id={review.reviewID}>Upvote: <span>{review.upvotes}</span></button>
+                          <p>------------------------------------</p>
+                      </div>
+                  ))
+                  )
+                  : <>Loading...</>
+                      
+              }
+            </div>
         </ReviewsContainer>
     );
 }
