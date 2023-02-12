@@ -10,25 +10,20 @@ const ReviewPreview = ({
   }) => {
     return (
         <ReviewPreviewContainer>
-            <div className="review-preview__video-container">
+            <div className="review-preview">
                 <iframe
-                    src={`https://www.tiktok.com/embed/${videoId}`}
-                    frameBorder="0"
-                    allow="autoplay"
-                    allowFullScreen
+                src={`https://www.tiktok.com/embed/${videoId}`}
+                frameBorder="0"
+                allow="autoplay"
+                allowFullScreen
                 />
+                <div className="text">
+                    <h3>Username: {username}</h3>
+                    <p>Product Type: {productType}</p>
+                    <p className="reviewContent">Text Review: {textReview}</p>
+                </div>
+                <button>Upvote: <span>0</span></button>
             </div>
-            <div className="review-preview__product-details">
-                <img
-                    src={productImage}
-                    alt={productName}
-                    className="review-preview__product-image"
-                />
-                <div className="review-preview__username">{username}</div>
-                <div className="review-preview__product-name">{productName}</div>
-                <div className="review-preview__product-type">{productType}</div>
-            </div>
-            <div className="review-preview__text-review">{textReview}</div>
         </ReviewPreviewContainer>
     );
 }

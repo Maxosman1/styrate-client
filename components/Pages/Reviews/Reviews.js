@@ -130,11 +130,18 @@ const Reviews = () => {
                   ? (
                     reviews.map((review) => (
                       <div className="review-preview" key={review.reviewID}>
+                        <iframe
+                        src={`https://www.tiktok.com/embed/${review.tiktokVideoId}`}
+                        frameBorder="0"
+                        allow="autoplay"
+                        allowFullScreen
+                        />
+                        <div className="text">
                           <h3>Username: {review.username}</h3>
-                          <p>Text Review: {review.textReview}</p>
                           <p>Product Type: {review.productType}</p>
-                          <button onClick={(e=e, upvoteCount=review.upvotes)=>{handleUpvote(e, review.upvotes)}} id={review.reviewID}>Upvote: <span>{review.upvotes}</span></button>
-                          <p>------------------------------------</p>
+                          <p className="reviewContent">Text Review: {review.textReview}</p>
+                        </div>
+                        <button onClick={(e=e, upvoteCount=review.upvotes)=>{handleUpvote(e, review.upvotes)}} id={review.reviewID}>Upvote: <span>{review.upvotes}</span></button>
                       </div>
                   ))
                   )
