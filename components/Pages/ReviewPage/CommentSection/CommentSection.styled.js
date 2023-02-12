@@ -62,7 +62,7 @@ export const CommentSectionContainer = styled.div`
         display: flex;
         flex-direction: column;
         & *{
-            border: 1px solid black;
+            border: 2px solid black;
             border-radius: 5px;;
         }
         & input{
@@ -76,6 +76,23 @@ export const CommentSectionContainer = styled.div`
             height: 100px !important;
             resize: none;
             padding: 10px;
+        }
+        & .message{
+            width: fit-content;
+            margin-top: 10px;
+            border: 0; outline: 0;
+        }
+        & button{
+            margin-top: 20px;
+            border: 2px solid black;
+            width: fit-content;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #CCCCCC;
+            &:hover{
+                background-color: #AAAAAA;
+            }
         }
     }
 `

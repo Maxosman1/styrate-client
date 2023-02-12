@@ -55,12 +55,12 @@ const CommentSection = ({reviewID}) => {
                 <h3>Comments</h3>
                 {/* <button onClick={turnOnModal}>Leave A Comment</button> */}
             </div>
-            <form className="newComment displayOff" onSubmit={handleCommentSubmit}>
-                <input type="text" placeholder="Username" id="usernameInput"/>
+            <form className="newComment displayOff" onSubmit={handleCommentSubmit} autoComplete='off'>
+                <input type="text" placeholder="Display Name" autoComplete="false"/>
                 <textarea placeholder="Comment" />
                 {
                     (errorMessage)
-                    ?  <p>{errorMessage}</p>
+                    ?  <p className="message">{errorMessage}</p>
                     : null
                 }
                 <button>Submit</button>
