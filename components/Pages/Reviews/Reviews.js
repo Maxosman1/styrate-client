@@ -147,7 +147,7 @@ const Reviews = () => {
                       </div>
                   ))
                   )
-                  : <>Loading...</>
+                  : <div className="loading">Loading...</div>
                       
               }
               <button className="sensor" ref={loadMoreRef} onClick={getNextBatch}>Load-More</button>

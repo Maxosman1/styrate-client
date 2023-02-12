@@ -21,6 +21,9 @@ export const ReviewsContainer = styled.div`
         }
     }
     & .reviewListContainer{
+        & .loading{
+            margin: 40px 0;
+        }
         width: 80%;
         display: flex;
         flex-direction: column; align-items: center;
