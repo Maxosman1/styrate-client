@@ -48,7 +48,7 @@ const ReviewPage = ({reviewData}) => {
                     </div>
                 </div>
             </div>
-            <CommentSection/>
+            <CommentSection reviewID={reviewData.reviewID}/>
         </ReviewPageContainer>
     );
 }

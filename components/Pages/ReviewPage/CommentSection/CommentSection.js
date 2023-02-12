@@ -1,16 +1,17 @@
 import { CommentSectionContainer } from "./CommentSection.styled";
 import {db} from '../../../../firebase/firebase'
 import { useEffect, useState } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { stringify } from "@firebase/util";
 
-const CommentSection = () => {
+const CommentSection = ({reviewID}) => {
     const [comments, setComments] = useState(null)
     const dbRef = collection(db, 'comments')
     useEffect(()=>{
         fetchComments()
     },[])
     const fetchComments = async() => {
-        const q = query(dbRef, orderBy('createdOn', 'desc'))
+        const q = query(dbRef, orderBy('createdOn', 'desc'), where('reviewID','==', reviewID ))
         try{
             const rawData = await getDocs(q);
             const result = rawData.docs.map(doc => ({
@@ -22,7 +23,9 @@ const CommentSection = () => {
             if(result.length!=0){
                 setComments(result)
             }
-        }catch(e){}
+        }catch(e){
+            console.log(e)
+        }
     }
     return (
         <CommentSectionContainer>
@@ -33,7 +36,10 @@ const CommentSection = () => {
                 ? (
                     comments.map(comment =>(
                         <div className="comment" key={comment.commentID}>
-                            {comment.commentText}
+                            <div className="meta">
+                                <p><span className="username">{comment.username}</span></p>
+                            </div>
+                            <p className="content">{comment.commentText}</p>
                         </div>
                     ))
                 )
