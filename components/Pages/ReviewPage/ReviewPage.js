@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ReviewPageContainer } from "./ReviewPage.styled";
 import {db} from '../../../firebase/firebase'
 import { doc, increment, updateDoc } from "firebase/firestore";
+import CommentSection from "./CommentSection/CommentSection";
 
 const ReviewPage = ({reviewData}) => {
     const handleUpvote = async(e) => {
@@ -47,6 +48,7 @@ const ReviewPage = ({reviewData}) => {
                     </div>
                 </div>
             </div>
+            <CommentSection/>
         </ReviewPageContainer>
     );
 }
