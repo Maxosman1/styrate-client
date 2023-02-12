@@ -1,7 +1,7 @@
 import ReviewList from "./ReviewList/ReviewList";
 import { ReviewsContainer } from "./Reviews.styled";
 import {db} from '../../../firebase/firebase'
-import { collection, doc, getDocs, increment, query, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, increment, limit, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 
 const Reviews = () => { 
@@ -15,10 +15,10 @@ const Reviews = () => {
     const getData = async(filter)=> {
       let q;
       if(filter){
-        q = query(dbRef, where('productType', '==', filter))
+        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'))
       }
       else{
-        q = query(dbRef)
+        q = query(dbRef, orderBy('createdOn', 'desc'))
       }
       try{
         const rawData = await getDocs(q);
