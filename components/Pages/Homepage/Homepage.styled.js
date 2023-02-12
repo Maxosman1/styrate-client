@@ -4,8 +4,8 @@ export const HomepageContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 10px 0 0 10px;
     & form{
-        margin: 10px 10px;
         & *{
             margin-bottom: 10px;
         }
@@ -16,5 +16,8 @@ export const HomepageContainer = styled.div`
                 margin-right: 20px;
             }
         }
+    }
+    & a{
+        color: blue; text-decoration: underline;
     }
 `

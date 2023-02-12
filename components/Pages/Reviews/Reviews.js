@@ -29,7 +29,6 @@ const Reviews = () => {
           productType: doc.data().productType,
           upvotes: doc.data().upvotes
         })) 
-        console.log(result)
         if(result.length!=0){
           setReviews(result)
         }else{
@@ -40,46 +39,11 @@ const Reviews = () => {
         console.log(e)
       }
     }
-    // const [selectedType, setSelectedType] = useState("all");
-    // const [displayedReviews, setDisplayedReviews] = useState([]);
-    // const [reviewsToDisplay, setReviewsToDisplay] = useState([]);
-    // const [reviewsFetched, setReviewsFetched] = useState(0);
-  
-    // useEffect(() => {
-      // setReviewsToDisplay(
-      //   reviews
-      //     .sort((a, b) => b.upvotes - a.upvotes)
-      //     .filter((review) => {
-      //       return selectedType === "all" || review.productType === selectedType;
-      //     })
-      // );
-      // setDisplayedReviews(reviewsToDisplay.slice(0, 5));
-    // }, [selectedType, reviews]);
-  
-    // useEffect(() => {
-    //   const handleScroll = () => {
-    //     if (
-    //       window.innerHeight + document.documentElement.scrollTop !==
-    //       document.documentElement.offsetHeight
-    //     )
-    //       return;
-  
-    //     setDisplayedReviews(
-    //       displayedReviews.concat(
-    //         reviewsToDisplay.slice(reviewsFetched, reviewsFetched + 5)
-    //       )
-    //     );
-    //     setReviewsFetched(reviewsFetched + 5);
-    //   };
-  
-    //   window.addEventListener("scroll", handleScroll);
-    //   return () => window.removeEventListener("scroll", handleScroll);
-    // }, [displayedReviews, reviewsFetched, reviewsToDisplay]);
   
     const handleTypeChange = (e) => {
       setReviews(null)
       if(e.target.value==='all'){
-        getData
+        getData()
       }else{
         getData(e.target.value)
       }
@@ -95,6 +59,7 @@ const Reviews = () => {
           })
       }catch(err){
           console.log(err)
+          e.target.querySelector('span').innerHTML = 'Server Error'
       }
     };
 

@@ -3,6 +3,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { useRef, useState } from "react";
 import { HomepageContainer } from "./Homepage.styled";
 import ReviewPreview from "./ReviewPreview/ReviewPreview";
+import Link from 'next/link';
 
 const Homepage = () => {
 
@@ -27,17 +28,18 @@ const Homepage = () => {
   
     const handlePreview = (e) => {
       e.preventDefault();
-      const { tiktokVideoId } = values;
-      fetch(
-        `https://www.tiktok.com/oembed?url=https://www.tiktok.com/@tiktok/video/${tiktokVideoId}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setDisplay(true)
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      // const { tiktokVideoId } = values;
+      // fetch(
+      //   `https://www.tiktok.com/oembed?url=https://www.tiktok.com/@tiktok/video/${tiktokVideoId}`
+      // )
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     setDisplay(true)
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
+      setDisplay(true)
     };
   
     const handleSubmit = async(e) => {
@@ -120,6 +122,7 @@ const Homepage = () => {
                 Submit
                 </button>
             </form>
+            <Link href='/reviews'>Go To All Reviews</Link>
             <div className="content" ref={content}>
                 {
                   (display)
