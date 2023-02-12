@@ -47,6 +47,12 @@ export const ReviewsContainer = styled.div`
                 & .reviewContent{
                     margin-top: 20px;
                 }
+                & a{
+                    text-decoration: underline;
+                    &:focus{
+                        outline: none;
+                    }
+                }
             }
             & button{
                 height: fit-content; width: fit-content;

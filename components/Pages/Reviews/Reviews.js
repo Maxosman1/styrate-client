@@ -141,9 +141,10 @@ const Reviews = () => {
                         allowFullScreen
                         />
                         <div className="text">
-                          <p>Product Name: <Link href={`/review/${review.reviewID}`}>{review.productName}</Link></p>
+                          <p>Product Name: {review.productName}</p>
                           <h3>Username: {review.username}</h3>
                           <p>Product Type: {review.productType}</p>
+                          <Link href={`/review/${review.reviewID}`}>Go to review page</Link>
                           <p className="reviewContent">Text Review: {review.textReview}</p>
                         </div>
                         <button onClick={(e=e, upvoteCount=review.upvotes)=>{handleUpvote(e, review.upvotes)}} id={review.reviewID}>Upvote: <span>{review.upvotes}</span></button>
