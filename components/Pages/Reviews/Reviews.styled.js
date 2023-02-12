@@ -32,7 +32,7 @@ export const ReviewsContainer = styled.div`
             border: 1px solid black; border-left: 0; border-right: 0;
             padding: 10px 0;
             margin: 10px 0;
-            height: 200px;
+            min-height: 200px;
             display: flex;
             align-items: center;
             & iframe{
