@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { HomepageContainer } from "./Homepage.styled";
 import ReviewPreview from "./ReviewPreview/ReviewPreview";
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Homepage = () => {
 
@@ -43,13 +44,14 @@ const Homepage = () => {
       setDisplay(true)
     };
   
+    const router = useRouter()
     const handleSubmit = async(e) => {
       e.preventDefault();
       setDisplay(false)
       setMessage('Sending Data')
       const dbRef = collection(db, "reviews");
       try{
-        await addDoc(dbRef, {
+        const docRef = await addDoc(dbRef, {
           tiktokVideoId: values.tiktokVideoId,
           amazonProductLink: values.amazonProductLink,
           username: values.username,
@@ -60,6 +62,7 @@ const Homepage = () => {
           productName: values.productName
         })
         setMessage('Data Sent')
+        router.push(`/review/${docRef.id}`)
       }
       catch(e){
         setMessage('Error')
