@@ -1,24 +1,29 @@
 import ReviewList from "./ReviewList/ReviewList";
 import { ReviewsContainer } from "./Reviews.styled";
 import {db} from '../../../firebase/firebase'
-import { collection, doc, getDocs, increment, limit, orderBy, query, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getCountFromServer, getDocs, increment, limit, orderBy, query, startAfter, updateDoc, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 
 const Reviews = () => { 
     const dbRef = collection(db, 'reviews')
     const [reviews, setReviews] = useState(null)
-    const [reviewCount, setReviewCount] = useState(0)
     const [loadingError, setLoadingError] = useState(false)
+    const [filter, setFilter] = useState(null)
+    
+    // Data Fetching
     useEffect(()=>{
-      getData()
-    },[])
-    const getData = async(filter)=> {
+      getFirstBatch()
+    },[filter])
+    const getFirstBatch = async()=> {
       let q;
-      if(filter){
-        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'))
+      let qToCount;
+      if(filter===null || filter==='all'){
+        q = query(dbRef, orderBy('createdOn', 'desc'),limit(1))
+        qToCount = query(dbRef, orderBy('createdOn', 'desc'))
       }
       else{
-        q = query(dbRef, orderBy('createdOn', 'desc'))
+        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), limit(1))
+        qToCount = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'))
       }
       try{
         const rawData = await getDocs(q);
@@ -29,12 +34,20 @@ const Reviews = () => {
           username: doc.data().username,
           textReview: doc.data().textReview,
           productType: doc.data().productType,
-          upvotes: doc.data().upvotes
+          upvotes: doc.data().upvotes,
+          createdOn: doc.data().createdOn
         })) 
+        const snapshot = await getCountFromServer(qToCount);
         if(result.length!=0){
           setReviews(result)
-        }else{
-          setReviews([{username: 'No results'}])
+          if(snapshot.data().count === result.length){
+            loadMoreRef.current.innerHTML = 'End of Results'
+            loadMoreRef.current.disabled = true
+          }
+        }else if(result.length===0){
+          setReviews([])
+          loadMoreRef.current.innerHTML = 'End of Results'
+          loadMoreRef.current.disabled = true
         }
         setLoadingError(false)
       }
@@ -44,18 +57,17 @@ const Reviews = () => {
       }
     }
   
+    // Filter Logic
     const handleTypeChange = (e) => {
+      loadMoreRef.current.innerHTML = 'Load-More'
+      loadMoreRef.current.disabled = false
       setReviews(null)
-      if(e.target.value==='all'){
-        getData()
-      }else{
-        getData(e.target.value)
-      }
+      setFilter(e.target.value)
     };
   
+    // Upvote Logic
     const handleUpvote = async(e, upvoteCount) => {
       e.target.querySelector('span').innerHTML = upvoteCount + 1
-      console.log(e.target, upvoteCount)
       const docRef = doc(db, 'reviews', e.target.id)
       try{
           await updateDoc(docRef, {
@@ -67,16 +79,42 @@ const Reviews = () => {
       }
     };
 
-    const sensorRef = useRef(null)
-    const checkIfInViewport = () => {
-      if(sensorRef.current.offsetTop < window.innerHeight){
-        console.log('In view')
+    // Load more logic
+    const loadMoreRef = useRef(null)
+    const getNextBatch = async() => {
+      const finalPost = reviews.slice(-1)[0]
+      let q;
+      if(filter===null || filter==='all'){
+        q = query(dbRef, orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(10))
+      }
+      else{
+        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(10))
+      }
+      try{
+        const rawData = await getDocs(q);
+        const result = rawData.docs.map(doc => ({
+          reviewID: doc.id,
+          tiktokVideoId: doc.data().tiktokVideoId,
+          amazonProductLink: doc.data().amazonProductLink,
+          username: doc.data().username,
+          textReview: doc.data().textReview,
+          productType: doc.data().productType,
+          upvotes: doc.data().upvotes,
+          createdOn: doc.data().createdOn
+        })) 
+        if(result.length!=0){
+          setReviews(oldData => [...oldData, result[0]])
+        }else{
+          loadMoreRef.current.innerHTML = 'End of Results'
+          loadMoreRef.current.disabled = true
+        }
+        setLoadingError(false)
+      }
+      catch(e){
+        console.log(e)
+        setLoadingError(true)
       }
     }
-    useEffect(()=>{
-      checkIfInViewport()
-      window.addEventListener('scroll', checkIfInViewport)
-    },[])
 
     return (
         <ReviewsContainer>
@@ -85,8 +123,9 @@ const Reviews = () => {
                 <select
                 id="product-type"
                 onChange={handleTypeChange}
+                defaultValue='all'
                 >
-                <option value="all" selected>All</option>
+                <option value="all">All</option>
                 <option value="beauty">Beauty</option>
                 <option value="fashion">Fashion</option>
                 <option value="tech">Tech</option>
@@ -98,7 +137,7 @@ const Reviews = () => {
                 (reviews)
                   ? (
                     reviews.map((review) => (
-                      <div className="review-preview" key={review.username}>
+                      <div className="review-preview" key={review.reviewID}>
                           <h3>Username: {review.username}</h3>
                           <p>Text Review: {review.textReview}</p>
                           <p>Product Type: {review.productType}</p>
@@ -110,7 +149,7 @@ const Reviews = () => {
                   : <>Loading...</>
                       
               }
-              <div className="sensor" ref={sensorRef}></div>
+              <button className="sensor" ref={loadMoreRef} onClick={getNextBatch}>Load-More</button>
             </div>
         </ReviewsContainer>
     );
