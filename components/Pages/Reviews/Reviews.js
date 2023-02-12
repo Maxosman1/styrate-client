@@ -16,14 +16,11 @@ const Reviews = () => {
     },[filter])
     const getFirstBatch = async()=> {
       let q;
-      let qToCount;
       if(filter===null || filter==='all'){
-        q = query(dbRef, orderBy('createdOn', 'desc'),limit(1))
-        qToCount = query(dbRef, orderBy('createdOn', 'desc'))
+        q = query(dbRef, orderBy('createdOn', 'desc'),limit(10))
       }
       else{
-        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), limit(1))
-        qToCount = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'))
+        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), limit(10))
       }
       try{
         const rawData = await getDocs(q);
@@ -37,13 +34,8 @@ const Reviews = () => {
           upvotes: doc.data().upvotes,
           createdOn: doc.data().createdOn
         })) 
-        const snapshot = await getCountFromServer(qToCount);
         if(result.length!=0){
           setReviews(result)
-          if(snapshot.data().count === result.length){
-            loadMoreRef.current.innerHTML = 'End of Results'
-            loadMoreRef.current.disabled = true
-          }
         }else if(result.length===0){
           setReviews([])
           loadMoreRef.current.innerHTML = 'End of Results'
