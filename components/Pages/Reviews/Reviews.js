@@ -1,7 +1,7 @@
 import ReviewList from "./ReviewList/ReviewList";
 import { ReviewsContainer } from "./Reviews.styled";
 import {db} from '../../../firebase/firebase'
-import { collection, doc, getDocs, increment, query, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, increment, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const Reviews = () => { 
@@ -10,8 +10,14 @@ const Reviews = () => {
     useEffect(()=>{
       getData()
     },[])
-    const getData = async()=> {
-      const q = query(dbRef)
+    const getData = async(filter)=> {
+      let q;
+      if(filter){
+        q = query(dbRef, where('productType', '==', filter))
+      }
+      else{
+        q = query(dbRef)
+      }
       try{
         const rawData = await getDocs(q);
         const result = rawData.docs.map(doc => ({
@@ -23,16 +29,21 @@ const Reviews = () => {
           productType: doc.data().productType,
           upvotes: doc.data().upvotes
         })) 
-        setReviews(result)
+        console.log(result)
+        if(result.length!=0){
+          setReviews(result)
+        }else{
+          setReviews([{username: 'No results'}])
+        }
       }
       catch(e){
         console.log(e)
       }
     }
-    const [selectedType, setSelectedType] = useState("all");
-    const [displayedReviews, setDisplayedReviews] = useState([]);
-    const [reviewsToDisplay, setReviewsToDisplay] = useState([]);
-    const [reviewsFetched, setReviewsFetched] = useState(0);
+    // const [selectedType, setSelectedType] = useState("all");
+    // const [displayedReviews, setDisplayedReviews] = useState([]);
+    // const [reviewsToDisplay, setReviewsToDisplay] = useState([]);
+    // const [reviewsFetched, setReviewsFetched] = useState(0);
   
     // useEffect(() => {
       // setReviewsToDisplay(
@@ -65,10 +76,13 @@ const Reviews = () => {
     //   return () => window.removeEventListener("scroll", handleScroll);
     // }, [displayedReviews, reviewsFetched, reviewsToDisplay]);
   
-    const handleTypeChange = (event) => {
-      setSelectedType(event.target.value);
-      setDisplayedReviews([]);
-      setReviewsFetched(0);
+    const handleTypeChange = (e) => {
+      setReviews(null)
+      if(e.target.value==='all'){
+        getData
+      }else{
+        getData(e.target.value)
+      }
     };
   
     const handleUpvote = async(e, upvoteCount) => {
@@ -90,10 +104,9 @@ const Reviews = () => {
                 <label htmlFor="product-type">Product Type:</label>
                 <select
                 id="product-type"
-                value={selectedType}
                 onChange={handleTypeChange}
                 >
-                <option value="all">All</option>
+                <option value="all" selected>All</option>
                 <option value="beauty">Beauty</option>
                 <option value="fashion">Fashion</option>
                 <option value="tech">Tech</option>
