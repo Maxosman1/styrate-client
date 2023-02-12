@@ -141,7 +141,7 @@ const Reviews = () => {
                         allowFullScreen
                         />
                         <div className="text">
-                          <p>Product Name: {review.productName}</p>
+                          <p>Product Name: <Link href={`/review/${review.reviewID}`}>{review.productName}</Link></p>
                           <h3>Username: {review.username}</h3>
                           <p>Product Type: {review.productType}</p>
                           <p className="reviewContent">Text Review: {review.textReview}</p>
