@@ -100,13 +100,17 @@ export const ReviewsContainer = styled.div`
                     & button{
                         height: fit-content; width: 120px;
                         padding: 20px;
+                        border-radius: 5px;
                         cursor:pointer;
                         margin-bottom: 20px;
-                        background-color: #EEEEEE;
-                        box-shadow: 0 0 3px #BBBBBB;
+                        background-color: #DDDDDD;
+                        outline: 0;
                         cursor: pointer;
                         &:hover{
-                            background-color: #DDDDDD;
+                            background-color: #CCCCCC;
+                        }
+                        &.clicked{
+                            background-color: #CCCCCC;
                         }
                     }
                 }

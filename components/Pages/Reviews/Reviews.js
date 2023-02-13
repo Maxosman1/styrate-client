@@ -63,12 +63,24 @@ const Reviews = () => {
   
     // Upvote Logic
     const handleUpvote = async(e, upvoteCount, reviewID) => {
+      const currentUpvoteCount = +e.target.querySelector('span').innerHTML 
       e.target.querySelector('span').innerHTML = upvoteCount + 1
       const docRef = doc(db, 'reviews', reviewID)
       try{
+        if(e.target.classList.contains('clicked')){
+          e.target.classList.toggle('clicked')
+          e.target.querySelector('span').innerHTML = currentUpvoteCount - 1
           await updateDoc(docRef, {
-              upvotes: increment(1)
+              upvotes: increment(-1)
           })
+        }
+        else{
+          e.target.querySelector('span').innerHTML = currentUpvoteCount +1
+          e.target.classList.toggle('clicked')
+          await updateDoc(docRef, {
+            upvotes: increment(1)
+        })
+        }
       }catch(err){
           console.log(err)
           e.target.querySelector('span').innerHTML = 'Server Error'
@@ -116,7 +128,7 @@ const Reviews = () => {
     // Article Click
     const router = useRouter()
     const handleArticleClick = (e,reviewID) =>{
-      if(e.target.className!='upvoteButton'){
+      if(e.target.classList.contains('upvoteButton')===false && e.target.classList.contains('buyNow')===false){
         router.push(`/review/${reviewID}`)
       }
     }
