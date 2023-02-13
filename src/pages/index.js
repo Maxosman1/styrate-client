@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageFormat>
-        <div>Update</div>
+        <div>Update 3</div>
         <Homepage/>
       </PageFormat>
     </>
