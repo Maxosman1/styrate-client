@@ -23,6 +23,9 @@ const CommentSection = ({reviewID}) => {
             if(result.length!=0){
                 setComments(result)
             }
+            else{
+                setComments(0)
+            }
         }catch(e){
             console.log(e)
         }
@@ -81,16 +84,18 @@ const CommentSection = ({reviewID}) => {
             </form>
             <div className="commentList">
             {
-                (comments)
-                ? (
-                    comments.map(comment =>(
-                        <div className="comment" key={comment.commentID}>
-                            <div className="meta">
-                                <p><span className="username">{comment.username}</span></p>
+                (comments!==null)
+                ? ((comments)
+                    ?
+                        (comments.map(comment =>(
+                            <div className="comment" key={comment.commentID}>
+                                <div className="meta">
+                                    <p><span className="username">{comment.username}</span></p>
+                                </div>
+                                <p className="content">{comment.commentText}</p>
                             </div>
-                            <p className="content">{comment.commentText}</p>
-                        </div>
-                    ))
+                        )))
+                    : null
                 )
                 : <>Loading</>
             }
