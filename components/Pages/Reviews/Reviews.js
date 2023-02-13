@@ -12,6 +12,7 @@ const Reviews = () => {
     const [reviews, setReviews] = useState(null)
     const [loadingError, setLoadingError] = useState(false)
     const [filter, setFilter] = useState(null)
+    const [loadMessage, setLoadMessage] = useState(null)
     
     // Data Fetching
     useEffect(()=>{
@@ -40,10 +41,10 @@ const Reviews = () => {
         })) 
         if(result.length!=0){
           setReviews(result)
+          setLoadMessage('Load More')
         }else if(result.length===0){
           setReviews([])
-          loadMoreRef.current.innerHTML = 'End of Results'
-          loadMoreRef.current.disabled = true
+          setLoadMessage(null)
         }
         setLoadingError(false)
       }
@@ -55,8 +56,7 @@ const Reviews = () => {
   
     // Filter Logic
     const handleTypeChange = (e) => {
-      loadMoreRef.current.innerHTML = 'Load-More'
-      loadMoreRef.current.disabled = false
+      setLoadMessage(null)
       setReviews(null)
       setFilter(e.target.value)
     };
@@ -101,9 +101,9 @@ const Reviews = () => {
         })) 
         if(result.length!=0){
           setReviews(oldData => [...oldData, result[0]])
+          setLoadMessage('Load More')
         }else{
-          loadMoreRef.current.innerHTML = 'End of Results'
-          loadMoreRef.current.disabled = true
+          setLoadMessage(null)
         }
         setLoadingError(false)
       }
@@ -174,7 +174,11 @@ const Reviews = () => {
                   : <div className="loading"><Loader/></div>
                       
               }
-              <button className="sensor" ref={loadMoreRef} onClick={getNextBatch}>Load-More</button>
+              {
+                (loadMessage!==null)
+                  ? <button className="sensor" ref={loadMoreRef} onClick={getNextBatch}>{loadMessage}</button>
+                  : null
+              }
             </div>
         </ReviewsContainer>
     );

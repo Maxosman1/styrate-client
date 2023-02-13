@@ -45,7 +45,7 @@ export const ReviewPageContainer = styled.div`
                         display: flex; flex-direction: column;
                         & .reviewText{
                             margin-bottom: 20px;
-                            line-height: 2;
+                            line-height: 1.5;
                         }
                         & .buttons{
                             display: flex;

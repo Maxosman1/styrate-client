@@ -31,7 +31,7 @@ export const ReviewsContainer = styled.div`
     & .reviewListContainer{
         background-color: white;
         & .loading{
-            margin: 40px 0;
+            margin-top: 100px;
         }
         width: 100%;
         display: flex;
@@ -71,6 +71,7 @@ export const ReviewsContainer = styled.div`
                     height: 100%; justify-content: flex-start;
                     & .reviewContent{
                         margin-top: 20px;
+                        line-height: 1.5;
                     }
                     & .title{
                         font-size: 1.3em;
