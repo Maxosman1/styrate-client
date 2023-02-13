@@ -9,12 +9,24 @@ export const HomepageContainer = styled.div`
         & *{
             margin-bottom: 10px;
         }
+        & label{
+            margin-right: 10px;
+        }
+        & input{
+            width: min(300px, 80%)
+        }
         & input,& button, & select{
             border: 1px solid black;
             border-radius: 3px;
-            &button{
-                margin-right: 20px;
-            }
+        }
+        & select{
+            padding: 3px 5px;
+        }
+        & button{
+            padding: 5px 10px;
+        }
+        & button:first-of-type{
+            margin-right: 20px;
         }
     }
     & a{
