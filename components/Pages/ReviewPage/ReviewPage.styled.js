@@ -3,58 +3,69 @@ import styled from "styled-components";
 export const ReviewPageContainer = styled.div`
     display: flex; flex-direction: column; align-items: center;
     width: 100%;
-    & .links{
-        width: 100%;
-        display: flex;
-        margin: 10px 0;
-        & a{
-            margin-right: 20px;
-            color: blue;
-            text-decoration: underline;
-        }
-    }
     & .content{
         width: 100%;
         & h1{
-            font-weight: 600;
-            margin: 20px 0;
-            font-size: 1.3em;
+            font-weight: 500;
+            margin: 20px 0 10px 0;
+            font-size: 1.5em;
         }
         & .contentInner{
-            display: flex;
-            flex-direction: row;
-            & iframe{
-                height: 500px;
-                width: auto;
-                margin-right: 40px;
-            }
             & .text{
                 display: flex; 
                 flex-direction: column;
                 & .topLevel{
-                    display: flex; flex-direction: column;
-                    & strong{
-                        all: inherit;
-                        display: inline;
-                        font-weight: 600;
+                    display: flex; flex-direction: row; align-items: center;
+                    margin-bottom: 40px;
+                    & p{
+                        font-size: 0.9em;
+                        width: fit-content;
+                        &.username{
+                            margin-right: 10px;
+                            background-color: black;
+                            color: white;
+                            padding: 3px 5px;
+                            border-radius: 3px;;
+                        }
+                        &.productType{
+                            font-style: italic;
+                        }
                     }
-                    margin-bottom: 40px;
                 }
-                & .reviewText{
-                    margin-bottom: 40px;
-                }
-                & .buttons{
+                & .textAndFrame{
                     display: flex;
-                    & *:not(span){
-                        background-color: #DDDDDD;
-                        padding: 20px;
-                        /* border: 1px solid black; */
-                        color: black;
-                        text-decoration: none;
-                        margin-right: 20px;
-                        &:hover{
-                            cursor: pointer;
-                            background-color: #CCCCCC;
+                    & iframe{
+                        width: fit-content;
+                        height: 400px;
+                        margin-right: 30px;
+                        border-radius: 10px;
+                    }
+                    & .textAndFrameInner{
+                        flex-grow: 1;
+                        display: flex; flex-direction: column;
+                        & .reviewText{
+                            margin-bottom: 20px;
+                            line-height: 2;
+                        }
+                        & .buttons{
+                            display: flex;
+                            & *:not(span){
+                                outline: none;
+                                width: 120px;
+                                border-radius: 5px;
+                                background-color: #EEEEEE;
+                                padding: 20px 0;
+                                color: black;
+                                text-decoration: none;
+                                margin-right: 20px;
+                                cursor: pointer;
+                                &:hover{
+                                    background-color: #CCCCCC;
+                                }
+                                &.disabled{
+                                    background-color: #CCCCCC;
+                                }
+                            }
                         }
                     }
                 }
