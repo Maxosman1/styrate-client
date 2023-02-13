@@ -4,6 +4,7 @@ import {db} from '../../../firebase/firebase'
 import { collection, doc, getCountFromServer, getDocs, increment, limit, orderBy, query, startAfter, updateDoc, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Reviews = () => { 
     const dbRef = collection(db, 'reviews')
@@ -60,9 +61,9 @@ const Reviews = () => {
     };
   
     // Upvote Logic
-    const handleUpvote = async(e, upvoteCount) => {
+    const handleUpvote = async(e, upvoteCount, reviewID) => {
       e.target.querySelector('span').innerHTML = upvoteCount + 1
-      const docRef = doc(db, 'reviews', e.target.id)
+      const docRef = doc(db, 'reviews', reviewID)
       try{
           await updateDoc(docRef, {
               upvotes: increment(1)
@@ -111,6 +112,14 @@ const Reviews = () => {
       }
     }
 
+    // Article Click
+    const router = useRouter()
+    const handleArticleClick = (e,reviewID) =>{
+      if(e.target.className!='upvoteButton'){
+        router.push(`/review/${reviewID}`)
+      }
+    }
+
     return (
         <ReviewsContainer>
             <div className="filter-container">
@@ -132,7 +141,7 @@ const Reviews = () => {
                 (reviews)
                   ? (
                     reviews.map((review) => (
-                      <div className="review-preview" key={review.reviewID}>
+                      <article className="review-preview" key={review.reviewID} onClick={(e=e,reviewID = review.reviewID)=>{handleArticleClick(e,review.reviewID)}} id={review.reviewID}>
                         <iframe
                         src={`https://www.tiktok.com/embed/${review.tiktokVideoId}`}
                         frameBorder="0"
@@ -140,14 +149,13 @@ const Reviews = () => {
                         allowFullScreen
                         />
                         <div className="text">
-                          <p>Product Name: {review.productName}</p>
-                          <h3>Username: {review.username}</h3>
+                          <h3 className="title">{review.productName}</h3>
+                          <p className="username">{review.username}</p>
                           <p>Product Type: {review.productType}</p>
-                          <Link href={`/review/${review.reviewID}`}>Go to review page</Link>
-                          <p className="reviewContent">Text Review: {review.textReview}</p>
+                          <p className="reviewContent">{review.textReview}</p>
                         </div>
-                        <button onClick={(e=e, upvoteCount=review.upvotes)=>{handleUpvote(e, review.upvotes)}} id={review.reviewID}>Upvote: <span>{review.upvotes}</span></button>
-                      </div>
+                        <button className="upvoteButton" onClick={(e=e, upvoteCount=review.upvotes, reviewID=review.reviewID)=>{handleUpvote(e, review.upvotes, review.reviewID )}}>Upvote: <span>{review.upvotes}</span></button>
+                      </article>
                   ))
                   )
                   : <div className="loading">Loading...</div>

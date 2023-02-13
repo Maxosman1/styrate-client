@@ -37,15 +37,16 @@ export const ReviewsContainer = styled.div`
             box-shadow: 0 0 5px #BBBBBB;
             border-radius: 10px;;
             margin: 10px 0;
-            min-height: 350px;
+            height: 340px;
             display: flex;
             align-items: center;
             & iframe{
-                height: 300px;
+                height: 100%;
                 margin-right: 20px;
                 border-radius: 5px;
             }
             & .text{
+                height: 100%;
                 width: 60%;
                 display: flex; flex-direction: column;
                 height: 100%; justify-content: flex-start;

@@ -27,6 +27,7 @@ export const HeaderContainer = styled.header`
                     &:hover{
                         background-color: #DDDDDD;
                     }
+                    font-size: 1.1em;
                 }
                 & h2{
                     font-size: 1em;
