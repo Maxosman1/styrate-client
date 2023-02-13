@@ -5,6 +5,7 @@ import { collection, doc, getCountFromServer, getDocs, increment, limit, orderBy
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Loader from "components/Common/Loader/Loader";
 
 const Reviews = () => { 
     const dbRef = collection(db, 'reviews')
@@ -170,7 +171,7 @@ const Reviews = () => {
                       </article>
                   ))
                   )
-                  : <div className="loading">Loading...</div>
+                  : <div className="loading"><Loader/></div>
                       
               }
               <button className="sensor" ref={loadMoreRef} onClick={getNextBatch}>Load-More</button>
