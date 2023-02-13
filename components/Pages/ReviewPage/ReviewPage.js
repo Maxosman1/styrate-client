@@ -7,21 +7,21 @@ import { useState } from "react";
 
 const ReviewPage = ({reviewData}) => {
     const [upvoteCount, setUpvoteCount] = useState(reviewData.upvotes)
+    const docRef = doc(db, 'reviews', reviewData.reviewID)
     const handleUpvote = async(e) => {
-        const docRef = doc(db, 'reviews', reviewData.reviewID)
         try{
             if(e.target.classList.contains('disabled')===false ){
+                e.target.classList.toggle('disabled')
                 setUpvoteCount(upvoteCount+1)
-                e.target.classList.add('disabled')
                 await updateDoc(docRef, {
                     upvotes: increment(1)
                 })
             }else{
+                e.target.classList.toggle('disabled')
                 setUpvoteCount(upvoteCount-1)
-                e.target.classList.remove('disabled')
                 await updateDoc(docRef, {
                     upvotes: increment(-1)
-                })
+            })
             }
         }catch(err){
             console.log(err)
@@ -51,7 +51,7 @@ const ReviewPage = ({reviewData}) => {
                                     {reviewData.textReview}
                                 </p>
                                 <div className="buttons">
-                                    <button onClick={handleUpvote}>↑ <span>{upvoteCount}</span></button>
+                                    <button onClick={handleUpvote}>↑ {upvoteCount}</button>
                                     <a href={reviewData.amazonProductLink} target='_blank' className="center">Buy Now</a>
                                 </div>
                             </div>
