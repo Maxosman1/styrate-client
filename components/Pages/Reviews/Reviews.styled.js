@@ -55,6 +55,7 @@ export const ReviewsContainer = styled.div`
                 background-color: white;
             }
             & iframe{
+                width: min-content;
                 height: 300px;
                 margin-right: 20px;
                 border-radius: 5px;
@@ -146,18 +147,27 @@ export const ReviewsContainer = styled.div`
                     flex-grow: 0;
                 }
                 & .textOuter{
-                    flex-direction: row;
+                    flex-direction: column;
+                    align-items: center;
                     & .textInner{
+                        align-items: center;
                         & .innerIframe{
                             display: flex;
+                            margin: 0;
                             margin-bottom: 20px;
+                            width: min-content;
                         }
                         & .type{
                             margin-bottom: 20px;
                         }
                     }
                     & .buttonContainer{
-                        flex-direction: column;
+                        flex-direction: row;
+                        & button{
+                            &:first-of-type{
+                                margin-right: 20px;
+                            }
+                        }
                     }
                 }
             }
