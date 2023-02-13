@@ -5,7 +5,7 @@ export const ReviewsContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 300px;
+    margin-bottom: 40px;
     & .filter-container{
         /* background-color: white; */
         width: 100%;
@@ -23,9 +23,14 @@ export const ReviewsContainer = styled.div`
         }
     }
     & .sensor{
-        border: 1px solid black;
-        :focus{
-            outline: none;
+        padding: 10px;
+        border-radius: 999px;
+        background-color: #EEEEEE;
+        cursor: pointer;
+        outline: none;
+        margin: 20px 0;
+        :hover{
+            background-color: #CCCCCC;
         }
     }
     & .reviewListContainer{

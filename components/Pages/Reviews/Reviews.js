@@ -41,7 +41,7 @@ const Reviews = () => {
         })) 
         if(result.length!=0){
           setReviews(result)
-          setLoadMessage('Load More')
+          setLoadMessage('▼')
         }else if(result.length===0){
           setReviews([])
           setLoadMessage(null)
@@ -113,7 +113,7 @@ const Reviews = () => {
         })) 
         if(result.length!=0){
           setReviews(oldData => [...oldData, ...result])
-          setLoadMessage('Load More')
+          setLoadMessage('▼')
         }else{
           setLoadMessage(null)
         }
