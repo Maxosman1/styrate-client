@@ -81,10 +81,10 @@ const Reviews = () => {
       const finalPost = reviews.slice(-1)[0]
       let q;
       if(filter===null || filter==='all'){
-        q = query(dbRef, orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(5))
+        q = query(dbRef, orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(10))
       }
       else{
-        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(5))
+        q = query(dbRef, where('productType', '==', filter), orderBy('createdOn', 'desc'), startAfter(finalPost.createdOn), limit(10))
       }
       try{
         const rawData = await getDocs(q);
@@ -100,7 +100,7 @@ const Reviews = () => {
           productName: doc.data().productName,
         })) 
         if(result.length!=0){
-          setReviews(oldData => [...oldData, result[0]])
+          setReviews(oldData => [...oldData, ...result])
           setLoadMessage('Load More')
         }else{
           setLoadMessage(null)
