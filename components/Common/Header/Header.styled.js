@@ -5,6 +5,9 @@ export const HeaderContainer = styled.header`
     height: 60px;
     background-color: #EEEEEE;
     box-shadow: 0 0 5px #BBBBBB;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 999;
     & nav{
         width: 95%; height: 100%;
         & ul{
