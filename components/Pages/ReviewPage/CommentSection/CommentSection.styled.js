@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CommentSectionContainer = styled.div`
-    width: 80%;
+    width: 100%;
     display: flex; 
     flex-direction: column;
     align-items: flex-start;
@@ -12,11 +12,9 @@ export const CommentSectionContainer = styled.div`
         flex-direction: row;
         align-items: center;
         & h3{
-            padding: 10px;
-            color: white;
-            background-color: black;
             font-size: 1.3em; 
-            border-radius: 5px;
+            font-weight: 500;
+            margin: 20px 0;
         }
         & button{
             height: fit-content;
@@ -53,7 +51,7 @@ export const CommentSectionContainer = styled.div`
     }
     & .newComment{
         width: 100%;
-        margin: 20px 0;
+        margin: 0px 0 20px 0;
         background-color: #EEEEEE;
         box-shadow: 0 0 5px #BBBBBB;
         border-radius: 10px;
@@ -62,13 +60,13 @@ export const CommentSectionContainer = styled.div`
         display: flex;
         flex-direction: column;
         & *{
-            border: 2px solid black;
             border-radius: 5px;;
         }
         & input{
             width: 200px;
             margin-bottom: 20px;
             padding: 10px;
+            box-shadow: 0 0 3px #BBBBBB;
         }
         & textarea{
             box-sizing: border-box;
@@ -76,6 +74,7 @@ export const CommentSectionContainer = styled.div`
             height: 100px !important;
             resize: none;
             padding: 10px;
+            box-shadow: 0 0 3px #BBBBBB;
         }
         & .message{
             width: fit-content;
@@ -84,14 +83,13 @@ export const CommentSectionContainer = styled.div`
         }
         & button{
             margin-top: 20px;
-            border: 2px solid black;
             width: fit-content;
             padding: 15px;
             border-radius: 5px;
             cursor: pointer;
-            background-color: #CCCCCC;
+            background-color:#DDDDDD;
             &:hover{
-                background-color: #AAAAAA;
+                background-color: #BBBBBB;
             }
         }
     }
