@@ -9,5 +9,8 @@ export const PageFormatContainer = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        @media all and (max-width: 1000px){
+            width: 95%;
+        }
     }
 `

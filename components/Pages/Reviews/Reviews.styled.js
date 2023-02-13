@@ -9,10 +9,17 @@ export const ReviewsContainer = styled.div`
     & .filter-container{
         /* background-color: white; */
         width: 100%;
-        margin: 10px 0;;
-        & a{
-            color: blue; text-decoration: underline;
-            margin-left: 20px;
+        margin: 10px 0;
+        & label{
+            margin-right: 10px;
+        }
+        & select{
+            box-shadow: 0 0 2px #BBBBBB;
+            padding: 3px 5px;
+            cursor: pointer;
+            &:active, &:focus{
+                outline: unset;
+            }
         }
     }
     & .sensor{
@@ -37,35 +44,122 @@ export const ReviewsContainer = styled.div`
             box-shadow: 0 0 5px #BBBBBB;
             border-radius: 10px;;
             margin: 10px 0;
-            height: 340px;
+            height: fit-content;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            &:hover{
+                cursor: pointer;
+                background-color: #EFEFEF;
+            }
+            &:focus, &:active{
+                background-color: white;
+            }
             & iframe{
-                height: 100%;
+                height: 300px;
                 margin-right: 20px;
                 border-radius: 5px;
             }
-            & .text{
-                height: 100%;
-                width: 60%;
-                display: flex; flex-direction: column;
-                height: 100%; justify-content: flex-start;
-                margin-right: 20px;
-                & .reviewContent{
-                    margin-top: 20px;
+            & .textOuter{
+                height: fit-content;
+                flex-grow: 1;
+                display: flex; align-items: center;
+                & .textInner{
+                    flex-grow: 1;
+                    min-height: 300px;
+                    display: flex; flex-direction: column;
+                    height: 100%; justify-content: flex-start;
+                    & .reviewContent{
+                        margin-top: 20px;
+                    }
+                    & .title{
+                        font-size: 1.3em;
+                        margin-bottom: 10px;
+                    }
+                    & .username{
+                        font-size: 0.8em;
+                        background-color: black;
+                        border-radius: 5px;
+                        padding: 3px 5px;
+                        color: white;
+                        width: fit-content;
+                    }
+                    & .type{
+                        font-style: italic;
+                    }
+                    & .innerIframe{
+                        display: none;
+                    }
                 }
-                & a{
-                    text-decoration: underline;
-                    &:focus{
-                        outline: none;
+                & .buttonContainer{
+                    height: 100%;
+                    display: flex; 
+                    flex-direction: column;
+                    padding: 0 0 0 20px;
+                    & button{
+                        height: fit-content; width: 120px;
+                        padding: 20px;
+                        cursor:pointer;
+                        margin-bottom: 20px;
+                        background-color: #EEEEEE;
+                        box-shadow: 0 0 3px #BBBBBB;
+                        cursor: pointer;
+                        &:hover{
+                            background-color: #DDDDDD;
+                        }
                     }
                 }
             }
-            & button{
-                height: fit-content; width: fit-content;
-                padding: 20px;
-                cursor:pointer;
-
+        }
+    }
+    @media all and (max-width: 850px){
+        & .reviewListContainer{
+            & .review-preview{
+                & .textOuter{
+                    flex-direction: column;
+                    align-items: flex-start;
+                    flex-shrink: 1;
+                    & .textInner{
+                        flex-shrink: 1;
+                        min-height: unset;
+                        height: fit-content;
+                        margin-bottom: 30px;
+                    }
+                    
+                    & .buttonContainer{
+                        flex-direction: row;
+                        padding: 0;
+                        & button{
+                            margin: 0;
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media all and (max-width: 700px){
+        & .reviewListContainer{
+            & .review-preview{
+                & > iframe{
+                    display: none;
+                    width: fit-content;
+                    flex-grow: 0;
+                }
+                & .textOuter{
+                    flex-direction: row;
+                    & .textInner{
+                        & .innerIframe{
+                            display: flex;
+                            margin-bottom: 20px;
+                        }
+                        & .type{
+                            margin-bottom: 20px;
+                        }
+                    }
+                    & .buttonContainer{
+                        flex-direction: column;
+                    }
+                }
             }
         }
     }

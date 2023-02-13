@@ -11,6 +11,9 @@ export const HeaderContainer = styled.header`
     box-shadow:  0 0 5px #BBBBBB;
     & nav{
         width: 95%; height: 100%;
+        @media all and (max-width: 1000px){
+            width: 100%;
+        }
         & ul{
             display: flex;
             align-items: center;

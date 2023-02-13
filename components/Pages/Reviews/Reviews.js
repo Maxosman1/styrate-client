@@ -148,13 +148,25 @@ const Reviews = () => {
                         allow="autoplay"
                         allowFullScreen
                         />
-                        <div className="text">
+                        <div className="textOuter">
+                          <div className="textInner">
                           <h3 className="title">{review.productName}</h3>
                           <p className="username">{review.username}</p>
-                          <p>Product Type: {review.productType}</p>
+                          <p className="type">{review.productType}</p>
+                          <iframe
+                          className="innerIframe"
+                          src={`https://www.tiktok.com/embed/${review.tiktokVideoId}`}
+                          frameBorder="0"
+                          allow="autoplay"
+                          allowFullScreen
+                          />
                           <p className="reviewContent">{review.textReview}</p>
+                          </div>
+                          <div className="buttonContainer">
+                            <button className="upvoteButton" onClick={(e=e, upvoteCount=review.upvotes, reviewID=review.reviewID)=>{handleUpvote(e, review.upvotes, review.reviewID )}}>↑ <span>{review.upvotes}</span></button>
+                            <button className="buyNow">Buy Now</button>
+                          </div>
                         </div>
-                        <button className="upvoteButton" onClick={(e=e, upvoteCount=review.upvotes, reviewID=review.reviewID)=>{handleUpvote(e, review.upvotes, review.reviewID )}}>Upvote: <span>{review.upvotes}</span></button>
                       </article>
                   ))
                   )
