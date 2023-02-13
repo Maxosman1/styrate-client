@@ -7,6 +7,7 @@ export const ReviewsContainer = styled.div`
     align-items: center;
     padding-bottom: 300px;
     & .filter-container{
+        /* background-color: white; */
         width: 100%;
         margin: 10px 0;;
         & a{
@@ -21,6 +22,7 @@ export const ReviewsContainer = styled.div`
         }
     }
     & .reviewListContainer{
+        background-color: white;
         & .loading{
             margin: 40px 0;
         }
@@ -28,16 +30,20 @@ export const ReviewsContainer = styled.div`
         display: flex;
         flex-direction: column; align-items: center;
         & .review-preview{
+            background-color: white;
             width: 100%;
-            border: 1px solid black; border-left: 0; border-right: 0;
-            padding: 10px 0;
+            box-sizing: border-box;
+            padding: 20px;
+            box-shadow: 0 0 5px #BBBBBB;
+            border-radius: 10px;;
             margin: 10px 0;
-            min-height: 200px;
+            min-height: 350px;
             display: flex;
             align-items: center;
             & iframe{
-                height: 100%;
+                height: 300px;
                 margin-right: 20px;
+                border-radius: 5px;
             }
             & .text{
                 width: 60%;

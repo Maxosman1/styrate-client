@@ -126,7 +126,6 @@ const Reviews = () => {
                 <option value="tech">Tech</option>
                 <option value="other">Other</option>
                 </select>
-                <Link href='/'>Home</Link>
             </div>
             <div className="reviewListContainer">
               {
