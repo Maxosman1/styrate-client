@@ -1,3 +1,4 @@
+import PageFormat from 'components/Common/PageFormat/PageFormat';
 import ReviewPage from 'components/Pages/ReviewPage/ReviewPage';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import Head from 'next/head';
@@ -12,7 +13,9 @@ const Review = ({reviewData}) => {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <ReviewPage reviewData={reviewData}/>
+        <PageFormat>
+          <ReviewPage reviewData={reviewData}/>
+        </PageFormat>
       </>
     );
 }

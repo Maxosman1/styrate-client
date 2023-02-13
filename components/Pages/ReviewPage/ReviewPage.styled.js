@@ -4,7 +4,7 @@ export const ReviewPageContainer = styled.div`
     display: flex; flex-direction: column; align-items: center;
     width: 100%;
     & .links{
-        width: 80%;
+        width: 100%;
         display: flex;
         margin: 10px 0;
         & a{
@@ -14,7 +14,7 @@ export const ReviewPageContainer = styled.div`
         }
     }
     & .content{
-        width: 80%;
+        width: 100%;
         & h1{
             font-weight: 600;
             margin: 20px 0;
