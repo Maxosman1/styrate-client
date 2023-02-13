@@ -72,6 +72,7 @@ const Homepage = () => {
     return (
         <HomepageContainer>
             <form>
+              <div className="videoID">
                 <label htmlFor="tiktokVideoId">TikTok Video ID:</label>
                 <input
                 type="text"
@@ -80,7 +81,8 @@ const Homepage = () => {
                 value={values.tiktokVideoId}
                 onChange={handleChange}
                 />
-                <br />
+              </div>
+              <div className="productLink">
                 <label htmlFor="amazonProductLink">Amazon Product Link:</label>
                 <input
                 type="text"
@@ -89,7 +91,8 @@ const Homepage = () => {
                 value={values.amazonProductLink}
                 onChange={handleChange}
                 />
-                <br />
+              </div>
+              <div className="productName">
                 <label htmlFor="productName">Product Name:</label>
                 <input
                 type="text"
@@ -98,7 +101,8 @@ const Homepage = () => {
                 value={values.productName}
                 onChange={handleChange}
                 />
-                <br />
+              </div>
+              <div className="username">
                 <label htmlFor="username">Username:</label>
                 <input
                 type="text"
@@ -107,16 +111,18 @@ const Homepage = () => {
                 value={values.username}
                 onChange={handleChange}
                 />
-                <br />
+              </div>
+              <div className="textReview">
                 <label htmlFor="textReview">Text Review:</label>
-                <input
+                <textarea
                 type="text"
                 name="textReview"
                 id="textReview"
                 value={values.textReview}
                 onChange={handleChange}
                 />
-                <br />
+              </div>
+              <div className="productType">
                 <label htmlFor="productType">Product Type:</label>
                 <select
                 name="productType"
@@ -129,13 +135,15 @@ const Homepage = () => {
                     <option value="tech">Tech</option>
                     <option value="other">Other</option>
                 </select>
-                <br />
+              </div>
+              <div className="buttonControls">
                 <button type="submit" onClick={handlePreview}>
                 Preview
                 </button>
                 <button type="submit" onClick={handleSubmit}>
                 Submit
                 </button>
+              </div>
             </form>
             <Link href='/reviews'>Go To All Reviews</Link>
             <div className="content" ref={content}>
