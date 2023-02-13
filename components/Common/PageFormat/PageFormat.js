@@ -3,9 +3,9 @@ import { PageFormatContainer } from "./PageFormat.styled";
 
 const PageFormat = ({children}) => {
     return (
-        <PageFormatContainer>
+        <PageFormatContainer className="center">
+            <Header/>
             <div className="pageFormat inner">
-                <Header/>
                 {
                     children
                 }

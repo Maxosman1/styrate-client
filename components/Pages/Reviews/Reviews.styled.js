@@ -7,7 +7,7 @@ export const ReviewsContainer = styled.div`
     align-items: center;
     padding-bottom: 300px;
     & .filter-container{
-        width: 80%;
+        width: 100%;
         margin: 10px 0;;
         & a{
             color: blue; text-decoration: underline;
@@ -24,7 +24,7 @@ export const ReviewsContainer = styled.div`
         & .loading{
             margin: 40px 0;
         }
-        width: 80%;
+        width: 100%;
         display: flex;
         flex-direction: column; align-items: center;
         & .review-preview{
