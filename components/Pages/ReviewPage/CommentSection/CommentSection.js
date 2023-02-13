@@ -33,8 +33,15 @@ const CommentSection = ({reviewID}) => {
     const handleCommentSubmit = async(e) =>{
         e.preventDefault()
         setErrorMessage('Submitting Comment...')
-        const username = e.target.querySelector('input').value
+        let username = e.target.querySelector('input').value
         const commentText = e.target.querySelector('textarea').value
+        if(username===''){
+            username = 'anonymous'
+        }
+        if(commentText===''){
+            setErrorMessage('Comment Cannot Be Empty')
+            return;
+        }
         const dbRef = collection(db, "comments");
         try{
             await addDoc(dbRef, {
@@ -43,7 +50,14 @@ const CommentSection = ({reviewID}) => {
                 createdOn : new Date(),
                 reviewID: reviewID
             })
-            setErrorMessage('Commment Submitted')
+            setErrorMessage('Comment Submitted')
+            e.target.querySelector('textarea').value = ''
+            e.target.querySelector('input').value = ''
+            fetchComments()
+            setTimeout(()=>{
+                setErrorMessage(null)
+            }, 1000)
+            
         } catch(err){
             setErrorMessage(err)
         }
