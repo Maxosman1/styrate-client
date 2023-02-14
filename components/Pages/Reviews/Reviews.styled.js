@@ -56,8 +56,11 @@ export const ReviewsContainer = styled.div`
                 cursor: pointer;
                 background-color: #EFEFEF;
             }
-            &:focus, &:active{
+            &:focus{
                 background-color: white;
+            }
+            &:active{
+                background-color: #EFEFEF;
             }
             & iframe{
                 width: min-content;

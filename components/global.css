@@ -26,3 +26,6 @@ html, body, #__next{
 #nprogress .peg {
     display: none !important;
 }
+#nprogress .spinner {
+    display: none !important;
+}
