@@ -1,5 +1,5 @@
 import PageFormat from 'components/Common/PageFormat/PageFormat'
-import Homepage from 'components/Pages/Homepage/Homepage'
+import Reviews from 'components/Pages/Reviews/Reviews'
 import Head from 'next/head'
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageFormat>
-        <Homepage/>
+        <Reviews/>
       </PageFormat>
     </>
   )

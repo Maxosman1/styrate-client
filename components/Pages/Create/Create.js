@@ -1,12 +1,12 @@
 import { db } from '../../../firebase/firebase'
 import { addDoc, collection } from "firebase/firestore";
 import { useRef, useState } from "react";
-import { HomepageContainer } from "./Homepage.styled";
+import { CreateContainer } from "./Create.styled";
 import ReviewPreview from "./ReviewPreview/ReviewPreview";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const Homepage = () => {
+const Create = () => {
 
     const content = useRef(null)
     const [values, setValues] = useState({
@@ -70,7 +70,7 @@ const Homepage = () => {
     };
 
     return (
-        <HomepageContainer>
+        <CreateContainer>
             <form>
               <div className="videoID">
                 <label htmlFor="tiktokVideoId">TikTok Video ID:</label>
@@ -165,8 +165,8 @@ const Homepage = () => {
             <div className="message">
               {message}
             </div>
-        </HomepageContainer>
+        </CreateContainer>
     );
 }
 
-export default Homepage;
+export default Create;
