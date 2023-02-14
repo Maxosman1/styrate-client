@@ -177,7 +177,7 @@ const Reviews = () => {
                           </div>
                           <div className="buttonContainer">
                             <button className="upvoteButton" onClick={(e=e, upvoteCount=review.upvotes, reviewID=review.reviewID)=>{handleUpvote(e, review.upvotes, review.reviewID )}}>↑ <span>{review.upvotes}</span></button>
-                            <button className="buyNow">Buy Now</button>
+                            <a className="buyNow" href={review.amazonProductLink}>Buy Now</a>
                           </div>
                         </div>
                       </article>

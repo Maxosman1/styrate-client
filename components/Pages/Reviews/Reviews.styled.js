@@ -102,7 +102,10 @@ export const ReviewsContainer = styled.div`
                     display: flex; 
                     flex-direction: column;
                     padding: 0 0 0 20px;
-                    & button{
+                    & button, & a{
+                        box-sizing: border-box;
+                        text-decoration: none;
+                        color: black;
                         height: fit-content; width: 120px;
                         padding: 20px;
                         border-radius: 5px;
@@ -110,6 +113,7 @@ export const ReviewsContainer = styled.div`
                         margin-bottom: 20px;
                         background-color: #DDDDDD;
                         outline: 0;
+                        text-align: center;
                         cursor: pointer;
                         &:hover{
                             background-color: #CCCCCC;
@@ -139,7 +143,7 @@ export const ReviewsContainer = styled.div`
                     & .buttonContainer{
                         flex-direction: row;
                         padding: 0;
-                        & button{
+                        & button, & a{
                             margin: 0;
                             margin-right: 20px;
                         }
@@ -173,7 +177,7 @@ export const ReviewsContainer = styled.div`
                     }
                     & .buttonContainer{
                         flex-direction: row;
-                        & button{
+                        & button, & a{
                             &:first-of-type{
                                 margin-right: 20px;
                             }
