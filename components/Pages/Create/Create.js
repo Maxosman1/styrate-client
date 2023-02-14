@@ -22,6 +22,7 @@ const Create = () => {
   
     const handleChange = (e) => {
       setDisplay(false)
+      setMessage(null)
       setValues({
         ...values,
         [e.target.name]: e.target.value
@@ -30,18 +31,12 @@ const Create = () => {
   
     const handlePreview = (e) => {
       e.preventDefault();
-      // const { tiktokVideoId } = values;
-      // fetch(
-      //   `https://www.tiktok.com/oembed?url=https://www.tiktok.com/@tiktok/video/${tiktokVideoId}`
-      // )
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     setDisplay(true)
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
-      setDisplay(true)
+      setMessage(null)
+      if(values.username!=='' && values.amazonProductLink!=='' && values.productName!=='' && values.tiktokVideoId!='' && values.textReview!=''){
+        setDisplay(true)
+      }else{
+        setMessage('Please Complete The Form')
+      }
     };
   
     const router = useRouter()
@@ -50,27 +45,32 @@ const Create = () => {
       setDisplay(false)
       setMessage('Sending Data')
       const dbRef = collection(db, "reviews");
-      try{
-        const docRef = await addDoc(dbRef, {
-          tiktokVideoId: values.tiktokVideoId,
-          amazonProductLink: values.amazonProductLink,
-          username: values.username,
-          textReview: values.textReview,
-          productType: values.productType,
-          upvotes: 0,
-          createdOn: new Date(),
-          productName: values.productName
-        })
-        setMessage('Data Sent')
-        router.push(`/review/${docRef.id}`)
-      }
-      catch(e){
-        setMessage('Error')
+      if(values.username!=='' && values.amazonProductLink!=='' && values.productName!=='' && values.tiktokVideoId!='' && values.textReview!=''){
+        try{
+          const docRef = await addDoc(dbRef, {
+            tiktokVideoId: values.tiktokVideoId,
+            amazonProductLink: values.amazonProductLink,
+            username: values.username,
+            textReview: values.textReview,
+            productType: values.productType,
+            upvotes: 0,
+            createdOn: new Date(),
+            productName: values.productName
+          })
+          setMessage('Data Sent')
+          router.push(`/review/${docRef.id}`)
+        }
+        catch(e){
+          setMessage('Error')
+        }
+      }else{
+        setMessage('Please Complete The Form')
       }
     };
 
     return (
         <CreateContainer>
+            <h1>Create A Review</h1>
             <form>
               <div className="videoID">
                 <label htmlFor="tiktokVideoId">TikTok Video ID:</label>
@@ -145,19 +145,37 @@ const Create = () => {
                 </button>
               </div>
             </form>
-            <Link href='/reviews'>Go To All Reviews</Link>
             <div className="content" ref={content}>
                 {
                   (display)
                     ? (
-                      <ReviewPreview 
-                      videoId={values.tiktokVideoId}
-                      productImage={null}
-                      productName={null}
-                      productType={values.productType}
-                      textReview={values.textReview}
-                      username={values.username}
-                      />
+                      <article className="review-preview">
+                        <iframe
+                        src={`https://www.tiktok.com/embed/${values.tiktokVideoId}`}
+                        frameBorder="0"
+                        allow="autoplay"
+                        allowFullScreen
+                        />
+                        <div className="textOuter">
+                          <div className="textInner">
+                          <h3 className="title">{values.productName}</h3>
+                          <p className="username">{values.username}</p>
+                          <p className="type">{values.productType}</p>
+                          <iframe
+                          className="innerIframe"
+                          src={`https://www.tiktok.com/embed/${values.tiktokVideoId}`}
+                          frameBorder="0"
+                          allow="autoplay"
+                          allowFullScreen
+                          />
+                          <p className="reviewContent">{values.textReview}</p>
+                          </div>
+                          <div className="buttonContainer">
+                            <button className="upvoteButton">↑ <span>0</span></button>
+                            <a className="buyNow" href={values.amazonProductLink}>Buy Now</a>
+                          </div>
+                        </div>
+                      </article>
                     )
                     : null
                 }
