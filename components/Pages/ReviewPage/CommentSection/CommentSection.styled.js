@@ -93,4 +93,13 @@ export const CommentSectionContainer = styled.div`
             }
         }
     }
+
+    @media all and (max-width: 700px){
+        & .newComment{
+            & input{
+                box-sizing: border-box;
+                width: 100%;
+            }
+        }
+    }
 `
