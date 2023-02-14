@@ -136,9 +136,9 @@ export const ReviewsContainer = styled.div`
     @media all and (max-width: 850px){
         & .reviewListContainer{
             & .review-preview{
-                &:hover{
+                /* &:hover{
                     background-color: white;
-                }
+                } */
                 & .textOuter{
                     flex-direction: column;
                     align-items: flex-start;
