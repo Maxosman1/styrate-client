@@ -72,4 +72,40 @@ export const ReviewPageContainer = styled.div`
             }
         }
     }
+
+    @media all and (max-width: 700px){
+        width: 90%;
+        & .content{
+            & h1{
+                text-align: center;
+            }
+            & .contentInner{
+                & .text{
+                    align-items: center;
+                    & .textAndFrame{
+                        align-items: center;
+                        flex-direction: column;
+                        & iframe{
+                            margin: 0;
+                            margin-bottom: 40px;
+                        }
+                        & .textAndFrameInner{
+                            align-items: center;
+                            & .reviewText{
+                                width: 90%;
+                                /* text-align: center; */
+                            }
+                            & .buttons{
+                                margin-top: 20px;
+                                justify-content: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media all and (max-width: 500px){
+        width: 95%;
+    }
 `
