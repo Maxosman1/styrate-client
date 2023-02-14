@@ -21,3 +21,8 @@ html, body, #__next{
 .center{
     display: flex; align-items: center; justify-content: center;
 }
+
+/* Progress bar blur */
+#nprogress .peg {
+    display: none !important;
+}

@@ -12,7 +12,7 @@ const LoaderContainer = styled.div`
     .loader {
         width: 48px;
         height: 48px;
-        border: 5px solid  #0054d1;
+        border: 5px solid #1a66ff;
         border-bottom-color: transparent;
         border-radius: 50%;
         display: inline-block;
