@@ -34,7 +34,9 @@ export const CommentSectionContainer = styled.div`
             display: flex; flex-direction: column;
             align-items: flex-start;
             border-radius: 10px;
-            box-shadow: 0 0 5px #BBBBBB;
+            box-shadow:  0 0 5px #BBBBBB;
+            -webkit-appearance: none;
+            -webkit-box-shadow:  0 0 5px #BBBBBB;
             box-sizing: border-box;
             padding: 20px 20px;
             & .meta{
@@ -53,7 +55,9 @@ export const CommentSectionContainer = styled.div`
         width: 100%;
         margin: 0px 0 20px 0;
         background-color: #EEEEEE;
-        box-shadow: 0 0 5px #BBBBBB;
+        box-shadow:  0 0 5px #BBBBBB;
+        -webkit-appearance: none;
+        -webkit-box-shadow:  0 0 5px #BBBBBB;
         border-radius: 10px;
         box-sizing: border-box;
         padding: 20px 20px;
@@ -67,6 +71,9 @@ export const CommentSectionContainer = styled.div`
             margin-bottom: 20px;
             padding: 10px;
             box-shadow: 0 0 3px #BBBBBB;
+            box-shadow:  0 0 3px #BBBBBB;
+            -webkit-appearance: none;
+            -webkit-box-shadow:  0 0 3px #BBBBBB;
         }
         & textarea{
             box-sizing: border-box;
@@ -74,7 +81,9 @@ export const CommentSectionContainer = styled.div`
             height: 100px !important;
             resize: none;
             padding: 10px;
-            box-shadow: 0 0 3px #BBBBBB;
+            box-shadow:  0 0 3px #BBBBBB;
+            -webkit-appearance: none;
+            -webkit-box-shadow:  0 0 3px #BBBBBB;
         }
         & .message{
             width: fit-content;

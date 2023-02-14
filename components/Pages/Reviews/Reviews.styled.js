@@ -14,7 +14,9 @@ export const ReviewsContainer = styled.div`
             margin-right: 10px;
         }
         & select{
-            box-shadow: 0 0 2px #BBBBBB;
+            box-shadow:  0 0 2px #BBBBBB;
+            -webkit-appearance: none;
+            -webkit-box-shadow:  0 0 2px #BBBBBB;
             padding: 3px 5px;
             cursor: pointer;
             &:active, &:focus{
@@ -46,7 +48,9 @@ export const ReviewsContainer = styled.div`
             width: 100%;
             box-sizing: border-box;
             padding: 20px;
-            box-shadow: 0 0 5px #BBBBBB;
+            box-shadow:  0 0 5px #BBBBBB;
+            -webkit-appearance: none;
+            -webkit-box-shadow:  0 0 5px #BBBBBB;
             border-radius: 10px;;
             margin: 10px 0;
             height: fit-content;

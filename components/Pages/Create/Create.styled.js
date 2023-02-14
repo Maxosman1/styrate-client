@@ -17,8 +17,10 @@ export const CreateContainer = styled.div`
             border: 0;
             box-sizing: border-box;
             border-radius: 8px;
-            box-shadow: 0 0 3px #AAAAAA;
             resize: none;
+            -webkit-appearance: none;
+            -webkit-box-shadow: 0 0 3px #AAAAAA;
+            box-shadow:0 0 3px #AAAAAA;
         }
         & select, & button{
             background-color: #EEEEEE;
@@ -64,7 +66,9 @@ export const CreateContainer = styled.div`
         width: 100%;
         box-sizing: border-box;
         padding: 20px;
-        box-shadow: 0 0 5px #BBBBBB;
+        box-shadow:  0 0 5px #BBBBBB;
+        -webkit-appearance: none;
+        -webkit-box-shadow:  0 0 5px #BBBBBB;
         border-radius: 10px;;
         margin: 10px 0;
         height: fit-content;
